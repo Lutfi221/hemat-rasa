@@ -5,3 +5,9 @@ server:
 logging:
   dir: "../logs"
   format: "dev"
+db:
+  host: "localhost"
+  username: "hemat_rasa"
+  password: ""
+  database: "hemat_rasa"
+  port: 5432
