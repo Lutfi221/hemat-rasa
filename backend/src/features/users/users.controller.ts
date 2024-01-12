@@ -9,7 +9,7 @@ import {
   Post,
   UseBefore,
 } from "routing-controllers";
-import { UserEntity } from "./user.entity";
+import { UserEntity } from "./entities/user.entity";
 import { ValidationMiddleware } from "@/middlewares/validation.middleware";
 import { CreateUserDto } from "./users.dto";
 import { OpenAPI } from "routing-controllers-openapi";

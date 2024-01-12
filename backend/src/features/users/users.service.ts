@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 import { CreateUserDto } from "./users.dto";
 import { AppDataSource } from "@/data-source";
-import { UserEntity } from "./user.entity";
+import { UserEntity } from "./entities/user.entity";
 
 @Service()
 export class UserService {
