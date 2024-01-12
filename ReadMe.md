@@ -15,3 +15,5 @@ Additionally, Hemat Rasa has a social media feature facilitating the sharing of 
 4. and location.
 
 Interested users can press the "Interested" button and visit the location to collect the food.
+
+![Swagger UI API endpoints](./docs/assets/images/swagger-endpoints.png)
