@@ -14,12 +14,12 @@ import { ValidationMiddleware } from "@/middlewares/validation.middleware";
 import { CreateUserDto } from "./users.dto";
 import { OpenAPI } from "routing-controllers-openapi";
 import Container from "typedi";
-import { UserService } from "./users.service";
+import { UsersService } from "./users.service";
 
 @JsonController()
 export class UsersController {
   public path = "/users";
-  public user = Container.get(UserService);
+  public user = Container.get(UsersService);
 
   @Get("/users/:userId")
   public async getUser(@Param("userId") userId: number) {

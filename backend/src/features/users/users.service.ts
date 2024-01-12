@@ -4,7 +4,7 @@ import { AppDataSource } from "@/data-source";
 import { UserEntity } from "./entities/user.entity";
 
 @Service()
-export class UserService {
+export class UsersService {
   public async createUser(userData: CreateUserDto) {
     const user = new UserEntity();
     user.firstName = userData.firstName;
