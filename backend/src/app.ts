@@ -10,7 +10,7 @@ import morgan from "morgan";
 import { useExpressServer, getMetadataArgsStorage } from "routing-controllers";
 import { routingControllersToSpec } from "routing-controllers-openapi";
 import swaggerUi from "swagger-ui-express";
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "@config";
+import { SERVER_CONFIG, LOGGING_CONFIG, NODE_ENV } from "@/app-config";
 import { ErrorMiddleware } from "@middlewares/error.middleware";
 import { logger, stream } from "@utils/logger";
 
@@ -22,7 +22,7 @@ export class App {
   constructor(Controllers: Function[]) {
     this.app = express();
     this.env = NODE_ENV || "development";
-    this.port = PORT || 3000;
+    this.port = SERVER_CONFIG.port;
 
     this.initializeMiddlewares();
     this.initializeRoutes(Controllers);
@@ -44,7 +44,7 @@ export class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
+    this.app.use(morgan(LOGGING_CONFIG.format, { stream }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
@@ -56,8 +56,8 @@ export class App {
   private initializeRoutes(controllers: Function[]) {
     useExpressServer(this.app, {
       cors: {
-        origin: ORIGIN,
-        credentials: CREDENTIALS,
+        origin: SERVER_CONFIG.origin,
+        credentials: SERVER_CONFIG.credentials,
       },
       controllers: controllers,
       defaultErrorHandler: false,

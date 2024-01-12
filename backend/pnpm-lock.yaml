@@ -20,6 +20,9 @@ dependencies:
   compression:
     specifier: ^1.7.4
     version: 1.7.4
+  config:
+    specifier: ^3.3.10
+    version: 3.3.10
   cookie-parser:
     specifier: ^1.4.6
     version: 1.4.6
@@ -41,6 +44,9 @@ dependencies:
   hpp:
     specifier: ^0.2.3
     version: 0.2.3
+  js-yaml:
+    specifier: ^4.1.0
+    version: 4.1.0
   jsonwebtoken:
     specifier: ^8.5.1
     version: 8.5.1
@@ -133,9 +139,6 @@ devDependencies:
   lint-staged:
     specifier: ^13.0.3
     version: 13.3.0
-  node-config:
-    specifier: ^0.0.2
-    version: 0.0.2
   node-gyp:
     specifier: ^9.1.0
     version: 9.4.1
@@ -1178,7 +1181,6 @@ packages:
 
   /argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
-    dev: true
 
   /array-flatten@1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
@@ -1680,6 +1682,13 @@ packages:
       typedarray: 0.0.6
     dev: false
     optional: true
+
+  /config@3.3.10:
+    resolution: {integrity: sha512-9Kl3LpQ6zj93KaqgfIMTcpwTpgozFOqNl/Dk7mjras1BgGIOlqxWkyIGeU1my+sRuskRYwrCATgCk1RjAnRPGA==}
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      json5: 2.2.3
+    dev: false
 
   /console-control-strings@1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
@@ -3115,7 +3124,6 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
-    dev: true
 
   /json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
@@ -3139,7 +3147,6 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
-    dev: true
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -3750,11 +3757,6 @@ packages:
   /node-addon-api@5.1.0:
     resolution: {integrity: sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==}
     dev: false
-
-  /node-config@0.0.2:
-    resolution: {integrity: sha512-NZu10oQ7jN6eDkRK22YX8j87mS02CuarKqoWIPcU6MKbuQ5dfLkvjOsWyN4ov+hPkIR7BppEueUg3QtcsRO7MA==}
-    engines: {node: '>=0.1.99'}
-    dev: true
 
   /node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}

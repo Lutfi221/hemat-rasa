@@ -1,0 +1,7 @@
+server:
+  port: 3000
+  origin: "*"
+  credentials: true
+logging:
+  dir: "../logs"
+  format: "dev"
