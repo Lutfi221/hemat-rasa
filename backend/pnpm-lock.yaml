@@ -59,6 +59,9 @@ dependencies:
   swagger-ui-express:
     specifier: ^4.5.0
     version: 4.6.3(express@4.18.2)
+  tslib:
+    specifier: ^2.6.2
+    version: 2.6.2
   typedi:
     specifier: ^0.10.0
     version: 0.10.0
