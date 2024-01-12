@@ -1,4 +1,4 @@
-import { ProductEntity } from "@/features/vendors/entities/product.entity";
+import { ProductEntity } from "@/features/inventories/entities/product.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { OrderEntity } from "./order.entity";
 
