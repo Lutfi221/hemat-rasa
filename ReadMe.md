@@ -1,6 +1,15 @@
 # Hemat Rasa
 
-Hemat Rasa is an application aimed at reducing food waste created by the Bit Bandits team for GDSC HackFest 2023/2024. It allows food buyers (such as restaurants and consumers) to
+Hemat Rasa is an application aimed at reducing food waste created by the Bit Bandits team for GDSC HackFest 2023/2024.
+
+Bit Bandits members:
+
+- Lutfi Azis Hafiizhudin
+- Muhamad Alif Anwar
+- Timothy Mulya Cahyana
+- Alvino Radyo Danisworo
+
+Hemat Rasa allows food buyers (such as restaurants and consumers) to
 
 1. purchase food based on its expiration date;
 2. and enables food sellers (such as supermarkets) to advertise and sell food nearing its expiration date at a discounted price.
