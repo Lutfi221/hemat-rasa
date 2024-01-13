@@ -19,6 +19,9 @@ export class OrderLineEntity {
   @ManyToOne(() => OrderEntity, (order) => order.orderLines)
   order: OrderEntity;
 
+  @Column()
+  productId: number;
+
   @ManyToOne(() => ProductEntity)
   product: ProductEntity;
 

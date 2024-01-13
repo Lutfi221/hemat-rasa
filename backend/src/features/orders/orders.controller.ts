@@ -34,4 +34,10 @@ export class OrdersController {
       await this.order.createOrderLine(orderId, orderLineData)
     );
   }
+
+  @Get("/order-lines")
+  @OpenAPI({ summary: "Get order lines" })
+  public async getOrderLines(@Param("orderId") orderId: number) {
+    return new Envelope(await this.order.getOrderLines(orderId));
+  }
 }

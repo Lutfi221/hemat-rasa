@@ -44,4 +44,10 @@ export class OrdersService {
 
     return orderLineSaved;
   }
+
+  public async getOrderLines(orderId: number) {
+    return AppDataSource.getRepository(OrderLineEntity).find({
+      where: { orderId },
+    });
+  }
 }
