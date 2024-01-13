@@ -15,10 +15,12 @@ import { CreateConsumerDto } from "./consumer.dto";
 import { Envelope } from "@/types/envelope";
 import { AppDataSource } from "@/data-source";
 import { CartEntity } from "../orders/entities/cart.entity";
+import { OrdersService } from "../orders/services/orders.service";
 
 @JsonController()
 export class ConsumersController {
   public consumer = Container.get(ConsumersService);
+  public order = Container.get(OrdersService);
 
   @Post("/consumers")
   @HttpCode(201)
@@ -35,5 +37,11 @@ export class ConsumersController {
       where: { consumer: { id: consumerId } },
     });
     return new Envelope(carts);
+  }
+
+  @Post("/consumers/:consumerId/orders")
+  @OpenAPI({ summary: "Create an order" })
+  public async createOrder(@Param("consumerId") consumerId: number) {
+    return new Envelope(await this.order.createOrder(consumerId));
   }
 }
