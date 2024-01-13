@@ -11,6 +11,10 @@ export class VendorsService {
     });
   }
 
+  public async getVendors() {
+    return AppDataSource.getRepository("VendorEntity").find();
+  }
+
   public async createVendor(vendorData: CreateVendorDto) {
     const vendor = new VendorEntity();
     vendor.userId = vendorData.userId;

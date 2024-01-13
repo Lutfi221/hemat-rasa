@@ -21,12 +21,6 @@ export class VendorsController {
   public vendor = Container.get(VendorsService);
   public inventory = Container.get(InventoriesService);
 
-  @Get("/vendors/:vendorId")
-  @OpenAPI({ summary: "Get a vendor" })
-  public async getVendor(@Param("vendorId") vendorId: number) {
-    return new Envelope(await this.vendor.getVendor(vendorId));
-  }
-
   @Post("/vendors")
   @HttpCode(201)
   @UseBefore(ValidationMiddleware(CreateVendorDto))
@@ -35,10 +29,28 @@ export class VendorsController {
     return new Envelope(await this.vendor.createVendor(vendor));
   }
 
+  @Get("/vendors")
+  @OpenAPI({ summary: "Get vendors" })
+  public async getVendors() {
+    return new Envelope(await this.vendor.getVendors());
+  }
+
+  @Get("/vendors/:vendorId")
+  @OpenAPI({ summary: "Get a vendor" })
+  public async getVendor(@Param("vendorId") vendorId: number) {
+    return new Envelope(await this.vendor.getVendor(vendorId));
+  }
+
   @Post("/vendors/:vendorId/inventories")
   @HttpCode(201)
   @OpenAPI({ summary: "Create a new inventory" })
-  public async createInventory() {
-    return new Envelope(await this.inventory.createInventory());
+  public async createInventory(@Param("vendorId") vendorId: number) {
+    return new Envelope(await this.inventory.createInventory(vendorId));
+  }
+
+  @Get("/vendors/:vendorId/inventories")
+  @OpenAPI({ summary: "Get inventories" })
+  public async getInventories(@Param("vendorId") vendorId: number) {
+    return new Envelope(await this.inventory.getInventories(vendorId));
   }
 }

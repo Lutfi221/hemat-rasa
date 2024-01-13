@@ -3,9 +3,11 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { InventoryEntity } from "../inventories/entities/inventory.entity";
 
 @Entity({ name: "vendor" })
 export class VendorEntity {
@@ -18,4 +20,8 @@ export class VendorEntity {
   @OneToOne(() => UserEntity)
   @JoinColumn({ name: "user_id" })
   user: UserEntity;
+
+  @Column()
+  @OneToMany(() => InventoryEntity, (inventory) => inventory.vendor)
+  inventories: InventoryEntity[];
 }

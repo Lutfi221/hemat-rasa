@@ -8,3 +8,11 @@ export class CreateStockDto {
   @IsNumber()
   quantity: number;
 }
+
+export class UpdateStockDto {
+  @IsNumber()
+  productId: number;
+
+  @IsNumber()
+  quantity: number;
+}

@@ -1,5 +1,6 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { StockEntity } from "./stock.entity";
+import { VendorEntity } from "@/features/vendors/vendor.entity";
 
 @Entity({ name: "inventory" })
 export class InventoryEntity {
@@ -8,4 +9,7 @@ export class InventoryEntity {
 
   @OneToMany(() => StockEntity, (stock) => stock.inventory)
   stocks: StockEntity[];
+
+  @ManyToOne(() => VendorEntity, (vendor) => vendor.inventories)
+  vendor: VendorEntity;
 }

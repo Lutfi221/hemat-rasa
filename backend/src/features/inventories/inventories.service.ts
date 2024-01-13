@@ -1,14 +1,24 @@
 import { Service } from "typedi";
 import { InventoryEntity } from "./entities/inventory.entity";
 import { AppDataSource } from "@/data-source";
-import { CreateStockDto } from "./dtos/stocks.dto";
+import { CreateStockDto, UpdateStockDto } from "./dtos/stocks.dto";
 import { StockEntity } from "./entities/stock.entity";
 import { ProductEntity } from "./entities/product.entity";
+import { VendorEntity } from "../vendors/vendor.entity";
 
 @Service()
 export class InventoriesService {
-  public async createInventory() {
+  public async getInventories(vendorId: number) {
+    return AppDataSource.getRepository(InventoryEntity).find({
+      where: { vendor: { id: vendorId } },
+    });
+  }
+
+  public async createInventory(vendorId: number) {
     const inventory = new InventoryEntity();
+    inventory.vendor = new VendorEntity();
+    inventory.vendor.id = vendorId;
+
     return AppDataSource.getRepository(InventoryEntity).save(inventory);
   }
 
@@ -39,5 +49,38 @@ export class InventoriesService {
     });
 
     return stockSaved;
+  }
+
+  public async getStocks(inventoryId: number) {
+    return AppDataSource.getRepository(StockEntity).find({
+      where: { inventory: { id: inventoryId } },
+      relations: ["product"],
+    });
+  }
+
+  public async getStock(inventoryId: number, stockId: number) {
+    return AppDataSource.getRepository(StockEntity).findOne({
+      where: { inventory: { id: inventoryId }, id: stockId },
+      relations: ["product"],
+    });
+  }
+
+  public async updateStock(
+    inventoryid: number,
+    stockId: number,
+    stockData: Partial<UpdateStockDto>
+  ) {
+    return AppDataSource.getRepository(StockEntity).save({
+      inventory: { id: inventoryid },
+      id: stockId,
+      ...stockData,
+    });
+  }
+
+  public async deleteStock(inventoryId: number, stockId: number) {
+    return AppDataSource.getRepository(StockEntity).delete({
+      inventory: { id: inventoryId },
+      id: stockId,
+    });
   }
 }

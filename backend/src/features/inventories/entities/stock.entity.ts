@@ -14,6 +14,9 @@ export class StockEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  productId: number;
+
   @OneToOne(() => ProductEntity)
   @JoinColumn()
   product: ProductEntity;

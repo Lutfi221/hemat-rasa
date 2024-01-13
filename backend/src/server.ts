@@ -6,6 +6,7 @@ import { ConsumersController } from "./features/consumer/consumers.controller";
 import { CartsController } from "./features/orders/carts.controller";
 import { OrdersController } from "./features/orders/orders.controller";
 import { OrderLinesController } from "./features/orders/order-lines.controller";
+import { StocksController } from "./features/inventories/stocks.controller";
 
 const app = new App([
   UsersController,
@@ -15,5 +16,6 @@ const app = new App([
   CartsController,
   OrdersController,
   OrderLinesController,
+  StocksController,
 ]);
 app.listen();

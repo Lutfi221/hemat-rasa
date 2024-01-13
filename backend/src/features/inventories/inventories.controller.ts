@@ -1,5 +1,6 @@
 import {
   Body,
+  Get,
   HttpCode,
   JsonController,
   Param,
@@ -27,5 +28,11 @@ export class InventoriesController {
     @Body() stockData: CreateStockDto
   ) {
     return new Envelope(this.inventory.createStock(inventoryId, stockData));
+  }
+
+  @Get("/inventories/:inventoryId/stocks")
+  @OpenAPI({ summary: "Get stocks" })
+  public async getStocks(@Param("inventoryId") inventoryId: number) {
+    return new Envelope(await this.inventory.getStocks(inventoryId));
   }
 }
