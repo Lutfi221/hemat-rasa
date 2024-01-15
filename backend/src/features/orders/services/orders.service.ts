@@ -5,6 +5,7 @@ import { OrderLineEntity } from "../entities/order-line.entity";
 import { CreateOrderLineDto } from "../dtos/order-line.dto";
 import { ProductEntity } from "@/features/inventories/entities/product.entity";
 import { ConsumerEntity } from "@/features/consumer/consumer.entity";
+import { UpdateOrderDto } from "../dtos/orders.dto";
 
 @Service()
 export class OrdersService {
@@ -19,6 +20,17 @@ export class OrdersService {
   public async getOrder(orderId: number) {
     return AppDataSource.getRepository(OrderEntity).findOne({
       where: { id: orderId },
+    });
+  }
+
+  public async updateOrder(orderId: number, orderData: UpdateOrderDto) {
+    const order = await AppDataSource.getRepository(OrderEntity).findOne({
+      where: { id: orderId },
+    });
+
+    return AppDataSource.getRepository(OrderEntity).save({
+      ...order,
+      ...orderData,
     });
   }
 
