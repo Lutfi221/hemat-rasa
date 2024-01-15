@@ -21,7 +21,6 @@ export class VendorEntity {
   @JoinColumn({ name: "user_id" })
   user: UserEntity;
 
-  @Column()
   @OneToMany(() => InventoryEntity, (inventory) => inventory.vendor)
   inventories: InventoryEntity[];
 }
