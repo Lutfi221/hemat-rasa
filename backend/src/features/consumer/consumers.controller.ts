@@ -2,6 +2,7 @@ import {
   Body,
   Get,
   HttpCode,
+  HttpError,
   JsonController,
   Param,
   Post,
@@ -16,6 +17,8 @@ import { Envelope } from "@/types/envelope";
 import { AppDataSource } from "@/data-source";
 import { CartEntity } from "../orders/entities/cart.entity";
 import { OrdersService } from "../orders/services/orders.service";
+import { ConsumerFromToken } from "../auth/auth.decorators";
+import { ConsumerEntity } from "./consumer.entity";
 
 @JsonController()
 export class ConsumersController {
@@ -32,7 +35,12 @@ export class ConsumersController {
 
   @Get("/consumers/:consumerId/carts")
   @OpenAPI({ summary: "Get consumer's carts" })
-  public async getCarts(@Param("consumerId") consumerId: number) {
+  public async getCarts(
+    @Param("consumerId") consumerId: number,
+    @ConsumerFromToken() consumer?: ConsumerEntity
+  ) {
+    if (consumer?.id !== consumerId) throw new HttpError(403, "Forbidden");
+
     const carts = await AppDataSource.getRepository(CartEntity).find({
       where: { consumer: { id: consumerId } },
     });
@@ -41,7 +49,12 @@ export class ConsumersController {
 
   @Post("/consumers/:consumerId/orders")
   @OpenAPI({ summary: "Create an order" })
-  public async createOrder(@Param("consumerId") consumerId: number) {
+  public async createOrder(
+    @Param("consumerId") consumerId: number,
+    @ConsumerFromToken() consumer?: ConsumerEntity
+  ) {
+    if (consumer?.id !== consumerId) throw new HttpError(403, "Forbidden");
+
     return new Envelope(await this.order.createOrder(consumerId));
   }
 }

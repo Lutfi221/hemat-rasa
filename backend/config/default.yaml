@@ -11,3 +11,6 @@ db:
   password: ""
   database: "hemat_rasa"
   port: 5432
+auth:
+  jwtSecret: "SUPER_SECRET_KEY_FOR_JWT_32_CHARS_MINIMUM"
+  jwtExpiresIn: "1d"

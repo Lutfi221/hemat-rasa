@@ -7,6 +7,7 @@ import {
   JsonController,
   Param,
   Post,
+  QueryParam,
   UseBefore,
 } from "routing-controllers";
 import { UserEntity } from "./user.entity";
@@ -20,6 +21,23 @@ import { UsersService } from "./users.service";
 export class UsersController {
   public path = "/users";
   public user = Container.get(UsersService);
+
+  @Get("/users")
+  public async getUsers(
+    @QueryParam("username", { required: true }) username: string
+  ) {
+    const user = await AppDataSource.getRepository(UserEntity).findOne({
+      where: { username },
+    });
+    if (!user) return new Envelope([]);
+
+    return new Envelope([
+      {
+        id: user.id,
+        username: user.username,
+      },
+    ]);
+  }
 
   @Get("/users/:userId")
   public async getUser(@Param("userId") userId: number) {

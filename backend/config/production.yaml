@@ -3,3 +3,5 @@ server:
   origin: null
 logging:
   format: "combined"
+auth:
+  jwtSecret: null

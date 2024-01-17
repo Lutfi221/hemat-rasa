@@ -14,6 +14,9 @@ import { Envelope } from "@/types/envelope";
 import { CreateVendorDto } from "./vendors.dto";
 import { InventoriesService } from "../inventories/inventories.service";
 import { ValidationMiddleware } from "@/middlewares/validation.middleware";
+import { VendorFromToken } from "../auth/auth.decorators";
+import { VendorEntity } from "./vendor.entity";
+import { HttpException } from "@/exceptions/HttpException";
 
 @JsonController()
 export class VendorsController {
@@ -37,20 +40,38 @@ export class VendorsController {
 
   @Get("/vendors/:vendorId")
   @OpenAPI({ summary: "Get a vendor" })
-  public async getVendor(@Param("vendorId") vendorId: number) {
+  public async getVendor(
+    @Param("vendorId") vendorId: number,
+    @VendorFromToken() vendor: VendorEntity
+  ) {
+    if (vendor?.id !== vendorId) {
+      throw new HttpException(403);
+    }
     return new Envelope(await this.vendor.getVendor(vendorId));
   }
 
   @Post("/vendors/:vendorId/inventories")
   @HttpCode(201)
   @OpenAPI({ summary: "Create a new inventory" })
-  public async createInventory(@Param("vendorId") vendorId: number) {
+  public async createInventory(
+    @Param("vendorId") vendorId: number,
+    @VendorFromToken() vendor: VendorEntity
+  ) {
+    if (vendor?.id !== vendorId) {
+      throw new HttpException(403);
+    }
     return new Envelope(await this.inventory.createInventory(vendorId));
   }
 
   @Get("/vendors/:vendorId/inventories")
   @OpenAPI({ summary: "Get inventories" })
-  public async getInventories(@Param("vendorId") vendorId: number) {
+  public async getInventories(
+    @Param("vendorId") vendorId: number,
+    @VendorFromToken() vendor: VendorEntity
+  ) {
+    if (vendor?.id !== vendorId) {
+      throw new HttpException(403);
+    }
     return new Envelope(await this.inventory.getInventories(vendorId));
   }
 }

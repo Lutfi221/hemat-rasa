@@ -8,6 +8,7 @@ import { OrdersController } from "./features/orders/orders.controller";
 import { OrderLinesController } from "./features/orders/order-lines.controller";
 import { StocksController } from "./features/inventories/stocks.controller";
 import { ExplorationController } from "./features/exploration/exploration.controller";
+import { AuthController } from "./features/auth/auth.controller";
 
 const app = new App([
   UsersController,
@@ -19,5 +20,6 @@ const app = new App([
   OrderLinesController,
   StocksController,
   ExplorationController,
+  AuthController,
 ]);
 app.listen();
