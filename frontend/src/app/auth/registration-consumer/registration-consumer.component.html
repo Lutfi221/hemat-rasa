@@ -1,1 +1,18 @@
-<p>registration-consumer works!</p>
+<layout-central>
+  <ng-container header>Pendaftaran Konsumen</ng-container>
+  <component-form [formGroup]="consumerData" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Nama pengguna</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nama awal</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nama akhir</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+    <button mat-button type="submit">Daftar</button>
+  </component-form>
+</layout-central>
