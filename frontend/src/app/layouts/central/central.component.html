@@ -1,0 +1,5 @@
+<div class="wrapper" [ngClass]="{ fullWidth: isSmall }">
+  <h1><ng-content select="[header]" /></h1>
+  <p><ng-content select="[description]" /></p>
+  <div class="content"><ng-content /></div>
+</div>
