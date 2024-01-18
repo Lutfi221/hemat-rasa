@@ -1,0 +1,26 @@
+<layout-central>
+  <ng-container header>Pendaftaran Konsumen</ng-container>
+  <component-form [formGroup]="formData" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Nama pengguna</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nama awal</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nama akhir</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Alamat</mat-label>
+      <input matInput formControlName="address" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Vendor name</mat-label>
+      <input matInput formControlName="vendorName" />
+    </mat-form-field>
+    <button mat-button type="submit">Daftar</button>
+  </component-form>
+</layout-central>
