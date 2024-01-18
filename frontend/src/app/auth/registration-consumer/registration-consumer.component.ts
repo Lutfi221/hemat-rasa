@@ -5,6 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../../auth/auth.service';
+import { CreateConsumerDto, CreateUserDto } from '../../../auth/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-consumer',
@@ -21,13 +24,31 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './registration-consumer.component.scss',
 })
 export class RegistrationConsumerComponent {
-  consumerData = new FormGroup({
-    username: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+  formData = new FormGroup({
+    username: new FormControl('', { nonNullable: true }),
+    firstName: new FormControl('', { nonNullable: true }),
+    lastName: new FormControl('', { nonNullable: true }),
+    address: new FormControl('', { nonNullable: true }),
   });
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit() {
-    console.log(this.consumerData.value);
+    const data = this.formData.value;
+    const userData: CreateUserDto = {
+      username: data.username || '',
+      firstName: data.firstName || '',
+      lastName: data.lastName || '',
+    };
+    const consumerData = {
+      address: data.address || '',
+      location: {
+        type: 'Point',
+        coordinates: [0, 0],
+      },
+    } as Omit<CreateConsumerDto, 'userId'>;
+
+    this.authService.registerConsumer(userData, consumerData);
+    this.router.navigate(['/login']);
   }
 }
