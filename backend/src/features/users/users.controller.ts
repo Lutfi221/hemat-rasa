@@ -44,6 +44,7 @@ export class UsersController {
     return new Envelope(
       await AppDataSource.getRepository(UserEntity).findOne({
         where: { id: userId },
+        relations: ["consumer", "vendor"],
       })
     );
   }

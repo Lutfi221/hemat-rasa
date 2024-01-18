@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { VendorEntity } from "../vendors/vendor.entity";
+import { ConsumerEntity } from "../consumer/consumer.entity";
 
 @Entity({ name: "user" })
 export class UserEntity {
@@ -16,4 +18,10 @@ export class UserEntity {
 
   @Column()
   coins: number;
+
+  @OneToOne(() => VendorEntity, (vendor) => vendor.user)
+  vendor: VendorEntity;
+
+  @OneToOne(() => ConsumerEntity, (consumer) => consumer.user)
+  consumer: ConsumerEntity;
 }

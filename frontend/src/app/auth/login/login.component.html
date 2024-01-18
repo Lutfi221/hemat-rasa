@@ -1,1 +1,14 @@
-<p>login works!</p>
+<layout-central>
+  <ng-container header>Masuk</ng-container>
+  <component-form [formGroup]="formData" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Nama pengguna</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Kata sandi</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Masuk</button>
+  </component-form>
+</layout-central>

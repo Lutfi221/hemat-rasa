@@ -45,6 +45,43 @@ export class AuthService implements OnInit {
     return tokenJson;
   }
 
+  setAuthToken(authToken: string): void {
+    localStorage.setItem('token', authToken);
+  }
+
+  async login(username: string, password: string): Promise<User> {
+    if (!password) throw new Error('Password is required');
+
+    const userPartialRes$ = this.http
+      .get<Envelope<User[]>>(`${environment.apiUrl}/users?username=${username}`)
+      .pipe(take(1));
+    const userPartial = await lastValueFrom(userPartialRes$).then(
+      (res) => res.data[0]
+    );
+    if (!userPartial) throw new Error('User not found');
+    const userId = userPartial.id;
+
+    const res$ = this.http
+      .post<Envelope<string>>(
+        `${environment.apiUrl}/users/${userId}/tokens`,
+        {}
+      )
+      .pipe(take(1));
+
+    const token = await lastValueFrom(res$);
+
+    this.setAuthToken(token.data);
+
+    const userRes$ = this.http
+      .get<Envelope<User>>(`${environment.apiUrl}/users/${userId}`)
+      .pipe(take(1));
+    const user = await lastValueFrom(userRes$).then((res) => res.data);
+
+    this.setUser(user);
+
+    return user;
+  }
+
   private async registerUser(userData: CreateUserDto) {
     const res$ = this.http
       .post<Envelope<User>>(environment.apiUrl + '/users', userData)
