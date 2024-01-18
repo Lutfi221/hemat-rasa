@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -44,12 +45,16 @@ export class LoginComponent {
     }),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.formData.valid) return;
     const data = this.formData.value;
     console.log(data);
-    this.authService.login(data.username!, data.password!);
+
+    const user = await this.authService.login(data.username!, data.password!);
+    if (user.consumer) this.router.navigate(['/consumers']);
+    else if (user.vendor) this.router.navigate(['/vendors']);
+    else this.router.navigate(['/']);
   }
 }

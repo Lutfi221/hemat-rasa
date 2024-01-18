@@ -1,7 +1,4 @@
-export type Location = {
-  type: 'Point';
-  coordinates: [number, number];
-};
+import { Location } from '../app/types';
 
 export interface CreateUserDto {
   username: string;

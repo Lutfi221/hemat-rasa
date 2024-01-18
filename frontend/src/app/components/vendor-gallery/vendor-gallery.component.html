@@ -1,0 +1,24 @@
+<mat-card *ngFor="let vendor of vendors">
+  <mat-card-header>
+    <mat-card-title
+      ><h2>{{ vendor.name }}</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://placehold.co/1080x1080/jpg"
+    [alt]="vendor.name"
+  />
+  <mat-card-content>
+    <p *ngIf="vendor.address">{{ vendor.address }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a
+      mat-flat-button
+      color="accent"
+      routerLink="browse"
+      [queryParams]="{ vendorId: vendor.id }"
+      >Kunjungi</a
+    >
+  </mat-card-actions>
+</mat-card>

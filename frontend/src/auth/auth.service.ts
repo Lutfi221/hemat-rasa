@@ -14,17 +14,16 @@ import { Envelope } from '../types';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+export class AuthService {
   private user: User | null = null;
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
+  getUser(): User | null {
+    if (this.user) return this.user;
+
     const userJson = localStorage.getItem('user');
     if (userJson) this.user = JSON.parse(userJson);
-  }
-
-  getUser(): User | null {
     return this.user;
   }
 
