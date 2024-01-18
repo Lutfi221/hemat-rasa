@@ -1,0 +1,23 @@
+<mat-card *ngFor="let stock of stocks; index as i">
+  <mat-card-header>
+    <mat-card-title>{{ stock.product.humanName }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ stock.product.price | currency : "IDR" }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://placehold.co/1080x1080/jpg" />
+  <mat-card-content>
+    <p>{{ stock.product.desc }}</p>
+    <p>Kedaluarsa dalam {{ daysLefts[i] }} hari</p>
+    <p>Stok: {{ stock.quantity }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- Plus or minus item to the cart -->
+    <button mat-button>
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+    <button mat-button>
+      <mat-icon>remove_shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

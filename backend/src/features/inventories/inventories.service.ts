@@ -58,6 +58,13 @@ export class InventoriesService {
     });
   }
 
+  public async getStocksByVendor(vendorId: number) {
+    return AppDataSource.getRepository(StockEntity).find({
+      where: { inventory: { vendor: { id: vendorId } } },
+      relations: ["product"],
+    });
+  }
+
   public async getStock(inventoryId: number, stockId: number) {
     return AppDataSource.getRepository(StockEntity).findOne({
       where: { inventory: { id: inventoryId }, id: stockId },

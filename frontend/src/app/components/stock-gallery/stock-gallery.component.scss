@@ -1,0 +1,16 @@
+:host {
+  // display: grid;
+  // grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-card {
+  display: flex;
+  width: 240px;
+}
+
+[mat-card-image] {
+  max-width: 100%;
+}

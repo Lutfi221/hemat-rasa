@@ -13,3 +13,19 @@ export type Vendor = {
   };
   address: string;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  humanName: string;
+  price: number;
+  desc: string;
+  expireAt: string;
+};
+
+export type Stock = {
+  id: number;
+  productId: number;
+  quantity: number;
+  product: Product;
+};

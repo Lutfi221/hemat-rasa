@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { FormComponent } from './form/form.component';
 import { VendorGalleryComponent } from './vendor-gallery/vendor-gallery.component';
 import { MatButtonModule } from '@angular/material/button';
+import { StockGalleryComponent } from './stock-gallery/stock-gallery.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -14,13 +16,21 @@ import { MatButtonModule } from '@angular/material/button';
     ChoiceCardComponent,
     FormComponent,
     VendorGalleryComponent,
+    StockGalleryComponent,
   ],
-  imports: [CommonModule, MatCardModule, RouterModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   exports: [
     ChoiceCardsComponent,
     ChoiceCardComponent,
     FormComponent,
     VendorGalleryComponent,
+    StockGalleryComponent,
   ],
 })
 export class ComponentsModule {}

@@ -4,20 +4,14 @@ import { RegistrationConsumerComponent } from './auth/registration-consumer/regi
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationVendorComponent } from './auth/registration-vendor/registration-vendor.component';
 import { IndexComponent as ConsumerIndexComponent } from './consumers/index/index.component';
-import { HomeComponent as ConsumerHomeComponent } from './consumers/home/home.component';
+import { consumerRoutes } from './consumers/counsumers.route';
 
 export const routes: Routes = [
   {
     path: 'consumers',
     title: 'Konsumen',
     component: ConsumerIndexComponent,
-    children: [
-      {
-        path: '',
-        title: 'Konsumen',
-        component: ConsumerHomeComponent,
-      },
-    ],
+    children: consumerRoutes,
   },
   {
     path: 'register',

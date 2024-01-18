@@ -89,4 +89,10 @@ export class VendorsController {
     }
     return new Envelope(await this.inventory.getInventories(vendorId));
   }
+
+  @Get("/vendors/:vendorId/stocks")
+  @OpenAPI({ summary: "Get stocks" })
+  public async getStocks(@Param("vendorId") vendorId: number) {
+    return new Envelope(await this.inventory.getStocksByVendor(vendorId));
+  }
 }
