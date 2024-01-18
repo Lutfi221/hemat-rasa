@@ -4,6 +4,7 @@ import {
   HttpCode,
   JsonController,
   Param,
+  Patch,
   Post,
   UseBefore,
 } from "routing-controllers";
@@ -11,7 +12,7 @@ import { OpenAPI } from "routing-controllers-openapi";
 import Container from "typedi";
 import { VendorsService } from "./vendors.service";
 import { Envelope } from "@/types/envelope";
-import { CreateVendorDto } from "./vendors.dto";
+import { CreateVendorDto, UpdateVendorDto } from "./vendors.dto";
 import { InventoriesService } from "../inventories/inventories.service";
 import { ValidationMiddleware } from "@/middlewares/validation.middleware";
 import { VendorFromToken } from "../auth/auth.decorators";
@@ -48,6 +49,20 @@ export class VendorsController {
       throw new HttpException(403);
     }
     return new Envelope(await this.vendor.getVendor(vendorId));
+  }
+
+  @Patch("/vendors/:vendorId")
+  @UseBefore(ValidationMiddleware(UpdateVendorDto))
+  @OpenAPI({ summary: "Update a vendor" })
+  public async updateVendor(
+    @Param("vendorId") vendorId: number,
+    @Body() vendor: UpdateVendorDto,
+    @VendorFromToken() vendorEntity: VendorEntity
+  ) {
+    if (vendorEntity?.id !== vendorId) {
+      throw new HttpException(403);
+    }
+    return new Envelope(await this.vendor.updateVendor(vendorId, vendor));
   }
 
   @Post("/vendors/:vendorId/inventories")

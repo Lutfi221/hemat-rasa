@@ -1,8 +1,10 @@
 import {
+  Column,
   Entity,
   JoinColumn,
   OneToMany,
   OneToOne,
+  Point,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { UserEntity } from "../users/user.entity";
@@ -23,4 +25,10 @@ export class ConsumerEntity {
 
   @OneToMany(() => OrderEntity, (order) => order.consumer)
   orders: OrderEntity[];
+
+  @Column({ type: "geometry", nullable: true })
+  location: Point;
+
+  @Column({ nullable: true })
+  address: string;
 }

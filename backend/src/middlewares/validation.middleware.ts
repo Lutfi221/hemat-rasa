@@ -30,7 +30,9 @@ export const ValidationMiddleware = (
       })
       .catch((errors: ValidationError[]) => {
         const message = errors
-          .map((error: ValidationError) => Object.values(error.constraints))
+          .map((error: ValidationError) =>
+            error?.constraints ? Object.values(error.constraints) : " - "
+          )
           .join(", ");
         next(new HttpException(400, message));
       });

@@ -5,6 +5,7 @@ import {
   JoinColumn,
   OneToMany,
   OneToOne,
+  Point,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { InventoryEntity } from "../inventories/entities/inventory.entity";
@@ -20,6 +21,15 @@ export class VendorEntity {
   @OneToOne(() => UserEntity)
   @JoinColumn({ name: "user_id" })
   user: UserEntity;
+
+  @Column({ nullable: true })
+  name: string;
+
+  @Column({ type: "geometry", nullable: true })
+  location: Point;
+
+  @Column({ nullable: true })
+  address: string;
 
   @OneToMany(() => InventoryEntity, (inventory) => inventory.vendor)
   inventories: InventoryEntity[];

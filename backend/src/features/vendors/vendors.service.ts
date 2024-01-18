@@ -1,6 +1,6 @@
 import { AppDataSource } from "@/data-source";
 import { Service } from "typedi";
-import { CreateVendorDto } from "./vendors.dto";
+import { CreateVendorDto, UpdateVendorDto } from "./vendors.dto";
 import { VendorEntity } from "./vendor.entity";
 
 @Service()
@@ -16,8 +16,17 @@ export class VendorsService {
   }
 
   public async createVendor(vendorData: CreateVendorDto) {
+    return AppDataSource.getRepository("VendorEntity").save({
+      ...vendorData,
+      user: { id: vendorData.userId },
+    });
+  }
+
+  public async updateVendor(vendorId: number, vendorData: UpdateVendorDto) {
     const vendor = new VendorEntity();
-    vendor.userId = vendorData.userId;
+    vendor.id = vendorId;
+    vendor.name = vendorData.name;
+    vendor.location = vendorData.location;
     return AppDataSource.getRepository("VendorEntity").save(vendor);
   }
 }
