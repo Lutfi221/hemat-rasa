@@ -6,8 +6,9 @@ import { VendorEntity } from "./vendor.entity";
 @Service()
 export class VendorsService {
   public async getVendor(vendorId: number) {
-    return AppDataSource.getRepository("VendorEntity").findOne({
+    return AppDataSource.getRepository(VendorEntity).findOne({
       where: { id: vendorId },
+      relations: { inventories: true },
     });
   }
 

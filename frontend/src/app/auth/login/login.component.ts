@@ -53,8 +53,8 @@ export class LoginComponent {
     console.log(data);
 
     const user = await this.authService.login(data.username!, data.password!);
-    if (user.consumer) this.router.navigate(['/consumers']);
-    else if (user.vendor) this.router.navigate(['/vendors']);
+    if (user.vendor) this.router.navigate(['/vendors']);
+    else if (user.consumer) this.router.navigate(['/consumers']);
     else this.router.navigate(['/']);
   }
 }
